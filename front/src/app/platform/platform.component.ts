@@ -136,22 +136,7 @@ token:any;
         }
       }
       }
-      // var li=[];
-      // for (let en = 0; en < this.liked.length; en++) {
-      //   for (let arts = 0; arts < this.article.length; arts++) {
-      //     if(this.article[arts].id == this.liked[en].content_id){
-      //       // this.article.liked='liked'
-      //     // li.push({liked:'liked'})
-      //       this.article.splice(0,1,this.article.liked='liked')
-      //     }else{
-      //       // li.push({liked:'like'})
-      //       this.article.splice(0,1,this.article.like='like')
-      //       // this.article.liked='null'
-      //     }
-      //   }
-      //   }
-    //  console.log(this.article) 
-        
+     y
         // var newArr =[]
         // for(var i in this.items){
         //     newArr.push(JSON.stringify(this.items[i]))

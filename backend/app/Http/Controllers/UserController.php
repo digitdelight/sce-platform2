@@ -12,6 +12,7 @@ use App\User;
 use App\comment_tbs;
 use App\Galleries;
 use App\Follows;
+use App\Likes;
 class UserController extends Controller
 {
 
@@ -44,13 +45,37 @@ class UserController extends Controller
             ->join('activities','categories.activity_id','=','activities.id')
             ->join('users','titles.user_id','=','users.id')
                ->join ('contents','titles.id','=','contents.name_id')
-            ->select('titles.*','categories.catname','contents.header','contents.content','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+            //    ->join ('likes','titles.id','=','likes.title_id')
+            ->select('titles.*','categories.catname','contents.header','contents.content','contents.id as content_id','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
             ->where('titles.status','=','Y')
+            ->get(),
+            'foll'=>title::orderBy('id','desc')->join('categories','titles.category_id','=','categories.id')
+        ->join('activities','categories.activity_id','=','activities.id')
+        ->join('users','titles.user_id','=','users.id')
+        ->leftJoin('follows','titles.user_id','=','follows.followed_user_id')
+        ->join ('contents','titles.id','=','contents.name_id')
+        ->select('titles.*','follows.followed_user_id','follows.user_id as following_user_id' ,'categories.catname','contents.header','contents.content','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+        ->where('titles.status','=','Y')
+        ->where('follows.user_id','=', auth()->user()->id)
+        ->get(),
+        'liked'=>title::orderBy('id','desc')->join('categories','titles.category_id','=','categories.id')
+            ->join('activities','categories.activity_id','=','activities.id')
+            ->join('users','titles.user_id','=','users.id')
+               ->join ('contents','titles.id','=','contents.name_id')
+               ->join ('likes','titles.id','=','likes.title_id')
+            ->select('titles.*','categories.catname','contents.header','contents.content','contents.name_id as content_id','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+            ->where('titles.status','=','Y')
+        ->where('likes.user_id','=', auth()->user()->id)
             ->get(),
             'follow'=>Follows::join('titles','follows.title_id','=','titles.id')
             ->join('users','follows.user_id','=','users.id')
             ->select('follows.*', )
             ->where('follows.user_id','=', auth()->user()->id)
+           ->get(),
+           'like'=>Likes::join('titles','likes.title_id','=','titles.id')
+            ->join('users','likes.user_id','=','users.id')
+            ->select('likes.*', )
+            ->where('likes.user_id','=', auth()->user()->id)
            ->get(),
             'gallery'=>Galleries::orderBy('id')->join('titles','galleries.title_id','=','titles.id')
            ->join('users','titles.user_id','=','users.id')
@@ -68,9 +93,13 @@ class UserController extends Controller
         'name'=>title::orderBy('id','desc')->join('categories','titles.category_id','=','categories.id')
         ->join('activities','categories.activity_id','=','activities.id')
         ->join('users','titles.user_id','=','users.id')
+        // ->leftJoin('follows','titles.user_id','=','follows.followe_user_id')
+        // ->leftJoin('follows','titles.user_id','!=','follows.followed_user_id')
            ->join ('contents','titles.id','=','contents.name_id')
-        ->select('titles.*','categories.catname','contents.header','contents.content','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+        ->select('titles.*','follows.followed_user_id','follows.user_id as following_user_id' ,'categories.catname','contents.id as content_id','contents.header','contents.content','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
         ->where('titles.status','=','Y')
+        // ->where('follows.user_id','=', '3')
+        // ->where('follows.user_id','!=', '3')
         ->get(),
         
         'gallery'=>Galleries::orderBy('id')->join('titles','galleries.title_id','=','titles.id')

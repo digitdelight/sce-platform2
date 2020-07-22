@@ -132,24 +132,25 @@
 
 
               <a class="btn btn-secondary"  role="button" [routerLink]="['/Login']">{{ folllow }} </a>
-              <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.id)" [routerLink]="['/Login']"><i class="fa fa-thumbs-o-up"></i> {{all.like}}</a>
+              <a class="btn btn-secondary float-right p-t-10"  [routerLink]="['/Login']"><i class="fa fa-thumbs-o-up"></i> {{all.like}}</a>
 
             </div>
             
             <div class="post-footer"  *ngIf="loggedIn" >
              
-              <div *ngFor="let cr of follows">
+              
               <a class="btn btn-secondary" (click)="nav(all.id)"  role="button">Read More</a>
               <!-- <a class="float-right p-t-10"  (click)="follow(all.id)"><i class="fa fa-heart-o"></i> {{all.views}}</a> -->
               <!-- <a class="float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-up"></i> {{all.like}}</a> -->
 
-<div *ngIf="id != all.user_id">
-              <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="cr.followed_user_id === all.user_id">folllowing  </a>
-              <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="cr.followed_user_id != all.user_id">{{ folllow }} </a>
 
-              <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-o-up"></i> {{all.like}}</a>
-</div>
-</div>
+              <!-- <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="follows.followed_user_id === all.user_id">following  </a> -->
+             <a class="btn btn-secondary" *ngIf="id != all.user_id" (click)="follow(all.id)" role="button"  >{{ folllow }} </a>
+
+              <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.content_id)" ><i class="fa fa-thumbs-o-up"></i>liked {{all.like}}</a> 
+              <!-- <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.content_id)" *ngIf="all.liked != 'liked'"><i class="fa fa-thumbs-o-up"></i>{{all.like}}</a>  -->
+
+
             </div>
           </div>
         </div>

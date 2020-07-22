@@ -61,6 +61,12 @@ token:any;
   url:any;
   appUrl:any;
   loggedIn: boolean;
+  like: any;
+  items= [];
+  item= [];
+  following= [];
+  existingLike: any;
+  liked= [];
 
   constructor( private Auth: AuthService,
     private router: Router,
@@ -74,14 +80,16 @@ token:any;
   public res:any;
   ftitle: any;
   id:any;
+  existingItem:any;
   ngOnInit() {
+   
     this.Auth.authStatus.subscribe(value => this.loggedIn = value);
     this.Jarwis.profile().subscribe(
       data=>{
       
       this.response = data;
       this.id=this.response.id;
-      console.log(this.id)
+      // console.log(this.id)
       this.image=this.appUrl+this.response.image
      
     });
@@ -98,17 +106,65 @@ token:any;
         data=>{
           this.loading=false;
         this.ftitle = data; 
-        this.follows=this.ftitle.follow;
-        console.log(this.follows)
-        // if(this.follows == 0 )   {
-        //   this.folllow = "Follow";
-        // }  else{
-        //   this.folllow = "Following";
-        // } 
         this.article=this.ftitle.name
         this.gallery=this.ftitle.gallery
-            console.log(this.gallery);
-            this.image= this.appUrl+this.article.t_image;
+            // console.log(this.gallery);
+        this.image= this.appUrl+this.article.t_image;
+        this.follows=this.ftitle.follow;
+        this.like=this.ftitle.like;
+        this.existingItem=this.ftitle.foll;
+        this.existingLike=this.ftitle.liked;
+        // console.log(this.follows)
+        var newArr =[]
+        for(var i in this.existingItem){
+            newArr.push(JSON.stringify(this.existingItem[i]))
+        }
+        
+         
+       
+     for(var i in newArr){
+      this.following.push(JSON.parse(newArr[i]))
+  }
+ 
+    //  console.log(this.following)
+    //  console.log(this.existingItem)
+
+     for (let e = 0; e < this.following.length; e++) {
+      for (let art = 0; art < this.article.length; art++) {
+        if(this.article[art].id == this.following[e].id){
+          this.article.splice(0,1)
+        }
+      }
+      }
+      // var li=[];
+      // for (let en = 0; en < this.liked.length; en++) {
+      //   for (let arts = 0; arts < this.article.length; arts++) {
+      //     if(this.article[arts].id == this.liked[en].content_id){
+      //       // this.article.liked='liked'
+      //     // li.push({liked:'liked'})
+      //       this.article.splice(0,1,this.article.liked='liked')
+      //     }else{
+      //       // li.push({liked:'like'})
+      //       this.article.splice(0,1,this.article.like='like')
+      //       // this.article.liked='null'
+      //     }
+      //   }
+      //   }
+    //  console.log(this.article) 
+        
+        // var newArr =[]
+        // for(var i in this.items){
+        //     newArr.push(JSON.stringify(this.items[i]))
+        // }
+        // var obj = {};
+        // newArr= newArr.filter((item)=>{
+        //     return obj.hasOwnProperty(item) ? false : (obj[item] = true);
+        // })
+        // this.items.length = 0
+        // for(var i in newArr){
+        //     this.items.push(JSON.parse(newArr[i]))
+        // }
+        
         }
       )
 
@@ -122,7 +178,7 @@ token:any;
         data=>{
         this.ftitle = data; 
         this.footer=this.ftitle[0] 
-        console.log(this.footer)      
+        // console.log(this.footer)      
         
         }
       )
@@ -134,7 +190,7 @@ token:any;
         this.actname1=this.resah.actname
         this.id1=this.resah.id
         this.resac=this.resa.subevent
-         console.log(this.resac)
+        //  console.log(this.resac)
 
          let result: any = data;
          this.documentArray = this.resa.subevent;
@@ -146,7 +202,7 @@ token:any;
         jQuery().append(string);
        },
        error => {
-         console.log(error);
+        //  console.log(error);
 
         
         }
@@ -285,6 +341,18 @@ this.Jarwis.like(id).subscribe(
   
   );
   }
+  onlikeLoad(id){
+    console.log(id)
+    // this.Jarwis.like(id).subscribe(
+    //   data =>  {
+    //     let snackBarRef = this.snackBar.open("like", 'Dismiss', {
+    //       duration: 2000
+    //     }) 
+    //     this.ngOnInit()
+    //   }
+      
+    //   );
+      }
   follow(id){
     // this.follows=this.article
     let follows = this.article.filter(c => c.id == id);

@@ -13,6 +13,7 @@ use App\User;
 use App\Galleries;
 use App\Follows;
 use App\url_setting;
+use App\Likes;
 class DisplayController extends Controller
 {
     /**
@@ -284,11 +285,36 @@ class DisplayController extends Controller
             ->where('activity_id','=',$id)
             ->where('titles.status','=','Y')
                ->get(),
+               'foll'=>title::orderBy('id','desc')->join('categories','titles.category_id','=','categories.id')
+               ->join('activities','categories.activity_id','=','activities.id')
+               ->join('users','titles.user_id','=','users.id')
+               ->leftJoin('follows','titles.user_id','=','follows.followed_user_id')
+               ->join ('contents','titles.id','=','contents.name_id')
+               ->select('titles.*','follows.followed_user_id','follows.user_id as following_user_id' ,'categories.catname','contents.header','contents.content','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+               ->where('titles.status','=','Y')
+               ->where('activity_id','=',$id)
+               ->where('follows.user_id','=', auth()->user()->id)
+               ->get(),
+               'liked'=>title::orderBy('id','desc')->join('categories','titles.category_id','=','categories.id')
+            ->join('activities','categories.activity_id','=','activities.id')
+            ->join('users','titles.user_id','=','users.id')
+               ->join ('contents','titles.id','=','contents.name_id')
+               ->join ('likes','titles.id','=','likes.title_id')
+            ->select('titles.*','categories.catname','contents.header','contents.content','contents.id as content_id','categories.destription','categories.activity_id','activities.actname','users.firstname','users.lastname','users.middlename', 'users.familybackground', 'users.image')
+            ->where('titles.status','=','Y')
+            ->where('activity_id','=',$id)
+        ->where('likes.user_id','=', auth()->user()->id)
+            ->get(),
                'follow'=>Follows::join('titles','follows.title_id','=','titles.id')
                ->join('users','follows.user_id','=','users.id')
                ->select('follows.*')
                ->where('follows.user_id','=', auth()->user()->id)
               ->get(),
+              'like'=>Likes::join('titles','likes.title_id','=','titles.id')
+              ->join('users','likes.user_id','=','users.id')
+              ->select('follows.*', )
+              ->where('likes.user_id','=', auth()->user()->id)
+             ->get(),
             'acti' =>Activities::where('id','=', $id)->get(),
             'cat' =>Category::where('activity_id','=', $id)->get()
         

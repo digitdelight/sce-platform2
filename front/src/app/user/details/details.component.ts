@@ -37,6 +37,7 @@ export class DetailsComponent implements OnInit {
 
       this.article=this.ftitle.name
       this.gallery=this.ftitle.gallery
+      // this.article= this.ftitle.foll;
           console.log(this.gallery);
       }
     )

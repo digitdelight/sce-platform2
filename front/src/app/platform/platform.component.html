@@ -147,7 +147,7 @@
               <!-- <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="follows.followed_user_id === all.user_id">following  </a> -->
              <a class="btn btn-secondary" *ngIf="id != all.user_id" (click)="follow(all.id)" role="button"  >{{ folllow }} </a>
 
-              <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.content_id)" ><i class="fa fa-thumbs-o-up"></i>liked {{all.like}}</a> 
+              <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.id)" ><i class="fa fa-thumbs-o-up"></i>Like {{all.like}}</a> 
               <!-- <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.content_id)" *ngIf="all.liked != 'liked'"><i class="fa fa-thumbs-o-up"></i>{{all.like}}</a>  -->
 
 

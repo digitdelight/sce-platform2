@@ -147,12 +147,10 @@
                   <!-- <a class="float-right p-t-10"  (click)="follow(all.id)"><i class="fa fa-heart-o"></i> {{all.views}}</a> -->
                   <!-- <a class="float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-up"></i> {{all.like}}</a> -->
     
-    <div *ngIf="id != all.user_id">
-                  <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="cr.followed_user_id === all.user_id">folllowing  </a>
-                  <a class="btn btn-secondary" (click)="follow(all.id)" role="button"  *ngIf="cr.followed_user_id != all.user_id">{{ folllow }} </a>
-    
-                  <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-o-up"></i> {{all.like}}</a>
-    </div>
+                  <a class="btn btn-secondary" *ngIf="id != all.user_id" (click)="follow(all.id)" role="button"  >{{ folllow }} </a>
+
+                  <a class="btn btn-secondary float-right p-t-10" (click)="likes(all.id)" ><i class="fa fa-thumbs-o-up"></i>Like {{all.like}}</a> 
+                
     </div>
                 </div>
                 <!-- <div class="post-footer">

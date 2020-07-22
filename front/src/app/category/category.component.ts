@@ -32,7 +32,13 @@ export class CategoryComponent implements OnInit {
   loggedIn: boolean;
   id: any;
   token: any;
-
+  like: any;
+  items= [];
+  item= [];
+  following= [];
+  existingLike: any;
+  liked= [];
+  existingItem:any;
   constructor(
     private Auth: AuthService,
     private router: Router,
@@ -78,8 +84,32 @@ export class CategoryComponent implements OnInit {
         this.actname=this.response.acti[0].actname
         this.title=this.response.title
         this.cat=this.response.cat
-        this.follows=this.response.follow;
+        // this.follows=this.response.follow;
+        this.like=this.ftitle.like;
+        this.existingItem=this.ftitle.foll;
+        this.existingLike=this.ftitle.liked;
+        // console.log(this.follows)
+        var newArr =[]
+        for(var i in this.existingItem){
+            newArr.push(JSON.stringify(this.existingItem[i]))
+        }
+        
+         
        
+     for(var i in newArr){
+      this.following.push(JSON.parse(newArr[i]))
+  }
+ 
+    //  console.log(this.following)
+    //  console.log(this.existingItem)
+
+     for (let e = 0; e < this.following.length; e++) {
+      for (let art = 0; art < this.article.length; art++) {
+        if(this.article[art].id == this.following[e].id){
+          this.article.splice(0,1)
+        }
+      }
+      }
         // this.id4=this.resnh.id
         this.lenght= this.title.length
         // console.log(this.lenght)
@@ -104,7 +134,7 @@ export class CategoryComponent implements OnInit {
   if(this.token == null){
     this.router.navigate(['Login']);
   }else
-  {    this.router.navigate(['Content/'+id+'']);
+  {    this.router.navigate(['Category/'+id+'']);
       this.ngOnInit()
     }
     

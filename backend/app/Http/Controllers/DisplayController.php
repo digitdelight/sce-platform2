@@ -312,7 +312,7 @@ class DisplayController extends Controller
               ->get(),
               'like'=>Likes::join('titles','likes.title_id','=','titles.id')
               ->join('users','likes.user_id','=','users.id')
-              ->select('follows.*', )
+              ->select('likes.*', )
               ->where('likes.user_id','=', auth()->user()->id)
              ->get(),
             'acti' =>Activities::where('id','=', $id)->get(),

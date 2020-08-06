@@ -50,7 +50,8 @@
                   <td class="center">{{t.catname}}</td>
                   <td class="center"> <span class="label label-default" *ngIf ="t.status=== 'T'">Trash</span>
                   </td>
-                  <td class="menu-action rounded-btn" ><a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashp(t.id)"> <i class="fa fa-undo"></i> </a> 
+                  <td class="menu-action rounded-btn" >
+                    <a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashp(t.id)"> <i class="fa fa-undo"></i> </a> 
 
                                                       <a data-original-title="edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="navigate(t.id)"> <i class="fa fa-pencil"></i> </a> 
                                                       <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red" (click)="deletep(t.id)"> <i class="fa fa-times"></i> </a></td>

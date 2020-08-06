@@ -19,7 +19,7 @@ import {startWith, map} from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   res: any; rese: any; resp: any; resl: any; resn: any; resb: any; resa: any ; resh: any;  reseh: any;  resph: any; reslh: any; resnh: any; resbh: any; resah: any; resc: any; resec: any; respc: any ; reslc: any; resnc: any; resbc: any; resac: any ; actname1: any; actname2: any; actname3: any; actname4: any; actname5: any; actname: any;
-
+p:any;
   title: any;
   searchdata: any;
   searchs:any;

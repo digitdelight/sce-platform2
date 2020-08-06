@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   private iss = {
     
-    // login: 'http://hamorah.com/testenv/backend/public/api/login',
+    login: 'http://hamorah.com/testenv/backend/public/api/login',
 
-    // signup: 'http://hamorah.com/testenv/backend/public/api/signup'
+    signup: 'http://hamorah.com/testenv/backend/public/api/signup'
 
 
-    login: 'http://localhost/sce-platform2/backend/public/api/login',
-    signup: 'http://localhost/sce-platform2/backend/public/api/signup'
+    // login: 'http://localhost/sce-platform2/backend/public/api/login',
+    // signup: 'http://localhost/sce-platform2/backend/public/api/signup'
 
     
   };

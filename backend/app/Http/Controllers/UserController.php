@@ -146,7 +146,7 @@ class UserController extends Controller
     public function getAllPost()
     {
         $post = DB::select('select count(id) as "all_post", (select COUNT(id) from titles where status = "N") as "pending", 
-        (select COUNT(id) from titles where status = "Y") as "approved",(select COUNT(id) from titles where status = "E") as "editted" from titles');
+        (select COUNT(id) from titles where status = "Y") as "approved",(select COUNT(id) from contributes where status = "N" or status = "E") as "editted" from titles');
       return $post;
 
     }

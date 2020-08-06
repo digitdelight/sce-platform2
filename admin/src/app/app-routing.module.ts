@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'signup', component: SigninComponent,canActivate: [AfterLoginService] },
 
 
-  // {path: 'dashboard', component: DashboardComponent,canActivate: [AfterLoginService] },
+  {path: 'dashboard', component: DashboardComponent,canActivate: [AfterLoginService] },
   {path: 'population/:id', component: PopulationComponent,canActivate: [AfterLoginService] },
   {path: 'edit/:id', component: EditComponent,canActivate: [AfterLoginService] },
   {path: 'editcon/:id', component: EditcontributeComponent,canActivate: [AfterLoginService] },

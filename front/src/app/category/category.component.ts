@@ -228,7 +228,9 @@ export class CategoryComponent implements OnInit {
               
               );
               }
-          refresh(){          
+          refresh(){  
+            window.location.reload();
+            return false;        
             this.ngOnInit()
           }
 

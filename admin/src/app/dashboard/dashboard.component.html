@@ -6,7 +6,7 @@
             <div class="vd_top-nav vd_nav-width  ">
             <div class="vd_panel-header">
                 <div class="logo">
-                  <a href="index.html"><img alt="logo" src="assets/img/logo.png"></a>
+                  <a href=""><img alt="logo" src="assets/img/logo.png"></a>
               </div>
               <!-- logo -->
               <div class="vd_panel-menu  hidden-sm hidden-xs" data-intro="<strong>Minimize Left Navigation</strong><br/>Toggle navigation size to medium or small size. You can set both button or one button only. See full option at documentation." data-step=1>
@@ -113,7 +113,7 @@
           <div class="vd_menu">
                <ul>
       <li>
-          <a routerLink="" data-action="click-trigger" (click) = "navigate()">
+          <a routerLink="" data-action="click-trigger" (click) = "reload()">
               <span class="menu-icon"><i class="fa fa-dashboard"></i></span> 
               <span class="menu-text">Dashboard</span>  
               <!-- <span class="menu-badge"><span class="badge vd_bg-black-30"><i class="fa fa-angle-down"></i></span></span> -->
@@ -145,7 +145,7 @@
       <li>
         <a data-action="click-trigger">
             <span class="menu-icon"><i class="icon-palette"> </i></span> 
-            <span class="menu-text">Population</span>  
+            <span class="menu-text">Contributions</span>  
             <span class="menu-badge"><span class="badge vd_bg-black-30"><i class="fa fa-angle-down"></i></span></span>
            </a>
          <div class="child-menu"  data-action="click-target">
@@ -160,7 +160,7 @@
           </div>
     </li>
       <li>
-        <a data-action="click-trigger" routerLINK>
+        <a data-action="click-trigger" routerLink>
             <span class="menu-icon"><i class="fa fa-caret-down"></i></span> 
             <span class="menu-text">Category</span>  
             <span class="menu-badge"><span class="badge vd_bg-black-30"><i class="fa fa-angle-down"></i></span></span>
@@ -192,7 +192,7 @@
     <li>
             <a routerLink="" (click)="Contribute()" data-action="click-trigger">
                 <span class="menu-icon"><i class="fa fa-plus"> </i></span> 
-                <span class="menu-text">Contribute</span>  
+                <span class="menu-text">Edited Contributions</span>  
                 <!-- <span class="menu-badge"><span class="badge vd_bg-black-30"><i class="fa fa-angle-down"></i></span></span> -->
                </a>
              
@@ -213,7 +213,7 @@
       <div class="vd_menu vd_navbar-bottom-widget">
           <ul>
               <li>
-                  <a >
+                  <a routerlink>
                       <span class="menu-icon"><i class="fa fa-sign-out"></i></span>          
                     <span class="menu-text"(click)="logout($event)">Logout</span>             
                   </a>

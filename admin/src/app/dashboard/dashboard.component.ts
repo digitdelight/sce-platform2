@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { JarwisService } from '../service/jarwis.service';
 import { TokenService } from '../service/token.service';
+declare let jQuery: any;
+declare let $ : any;
+// declare let particlesJS : any;
 
 @Component({
   selector: 'app-dashboard',
@@ -20,10 +23,13 @@ export class DashboardComponent implements OnInit {
     private Auth: AuthService,
     private router: Router,
     private Jarwis: JarwisService,
-    private Token: TokenService
+    private Token: TokenService,
   ) { }
 
   ngOnInit() {
+    new jQuery();
+    // new theme();
+    
     this.Jarwis.geturl().subscribe(
       data=>{
        
@@ -57,9 +63,35 @@ export class DashboardComponent implements OnInit {
    
     })
 
-
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+    
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
   }
+  
+  // if(window.onclose()){
 
+  // }
+  // @HostListener('window:loadend')
+
+  // async ngOnDestroy() {
+  //   localStorage.removeItem('token');
+  // }
+  // @HostListener('window:close', ['$event'])
+  //   closeHandler(event) {
+  //       window.sessionStorage.clear();
+  //       localStorage.removeItem('token');
+  //   }
   logout(event: MouseEvent) {
     event.preventDefault();
     this.Token.remove();
@@ -86,5 +118,10 @@ export class DashboardComponent implements OnInit {
     this.ngOnInit();
     this.router.navigate(['contribute/']);
   }
-
+  reload(){
+    window.location.reload();
+    return false;
+    // this.ngOnInit();
+   }
+   
 }

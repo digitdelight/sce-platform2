@@ -4,9 +4,10 @@ import {} from 'googlemaps';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapServiceService } from '../map-service.service';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
+import {startWith, map, windowWhen} from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -17,7 +18,7 @@ import {startWith, map} from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public catForm: FormGroup;
   res: any; rese: any; resp: any; resl: any; resn: any; resb: any; resa: any ; resh: any;  reseh: any;  resph: any; reslh: any; resnh: any; resbh: any; resah: any; resc: any; resec: any; respc: any ; reslc: any; resnc: any; resbc: any; resac: any ; actname1: any; actname2: any; actname3: any; actname4: any; actname5: any; actname: any;
 p:any;
   title: any;
@@ -37,10 +38,19 @@ p:any;
   url:any;
   appUrl:any;
   edittedpost:any;
-
-  
-  constructor(private Jarwis: JarwisService,private router: Router,private mapserver: MapServiceService, private coordGet: MapServiceService) { }
-
+  content:any;
+  respo:any;
+  selectedid:any;
+  constructor(private formBuilder:FormBuilder,private Jarwis: JarwisService,private router: Router,private mapserver: MapServiceService, private coordGet: MapServiceService,public snackBar: MatSnackBar) { }
+  dataChanged(event){
+    this.catForm.value.category_id=event
+   this.id=this.catForm.value.category_id.category_id
+     this.Jarwis.post(this.id).subscribe(data=>{
+        this.respo = data;
+     
+     
+      })
+  }
   public lat;
   data: any;
   newArr = [];
@@ -48,15 +58,63 @@ p:any;
   public marker;
   public fakerIt = [];
   public posts=[];
+  public cat:any;
+  // public form = {
+  //   category_id: null,
+  //   name_title:'',
+  //   location:null,
+  //   about: 'Content',
+  //   t_image:null,
+  //   image:null,
+  //   videos:null,
+  //   contents:null,
+  //   }
+  public img=[];
   ngOnInit() {
     // this.router.navigateByUrl('');
-    this.reload();
-this.gets();
-   
+  this.gets();
+  this.catForm =  this.formBuilder.group({
+    category_id: null,
+    name_title:'',
+    location:null,
+    about: 'Content',
+    // t_image:null,
+    image:null,
+    videos:null,
+    contents:null,
+    quote:null
+  }); 
   }
-  reload(){
-    this.router.navigateByUrl('');
+ onSubmit(){
+   console.log(this.catForm.value.image);
+   this.content=[{header:this.catForm.value.name_title, content:this.catForm.value.contents,quote: this.catForm.value.quote, c_image:this.catForm.value.image}]
+   this.catForm.value.contents = this.content;
+   console.log("forms",this.catForm.value);
+   this.Jarwis.content(this.catForm.value).subscribe(
+    data => this.handleResponse(data),
+      error => this.handleError(error)
+ );
+    //   this.disabled=true;
+    // this.sav= 'Posting';
+ }
+ uploadFiles(event){
+  let files =event.target.files;
+  if (files){
+    for(let file of files){
+      let reader= new FileReader();
+      let vm = this;
+      reader.onload =()=> {
+       this.img.push(reader.result);
+      
+      }
+      reader.readAsDataURL(file);
+      
   }
+  }
+  this.catForm.value.image = this.img;
+  // console.log(event)
+  // console.log(this.form.image)
+}
   gets(){
     this.Jarwis.geturl().subscribe(
       data=>{
@@ -106,6 +164,12 @@ this.gets();
          console.log(error.error);
        }
      )
+     this.Jarwis.getact().subscribe(
+      data=>{
+      
+      this.cat = data;  
+      
+      })
   }
 reject(id){
   this.Jarwis.rejectContribution(id).subscribe(
@@ -146,5 +210,27 @@ rejects(id){
   }
   navigate(id){
     this.router.navigate(['Content/'+id+''])
+  }
+  reload(){
+    window.location.reload();
+    return false;
+    // this.ngOnInit();
+   }
+   handleError(error: any): void {
+    // this.disabled=false;
+    // this.sav= 'Contribute';
+    let snackBarRef = this.snackBar.open("Failed", 'Dismiss', {
+      duration: 5000
+    })
+  }
+
+  
+  
+  handleResponse(data) {    
+    let snackBarRef = this.snackBar.open("Thank you for your contribution, The Editorial team will like to confirm your contribution before it's been publish.", 'Dismiss', {
+      duration: 5000
+    }) 
+  //  this.disabled=true;
+  //   this.router.navigateByUrl('/User/(side:Details)');
   }
 }

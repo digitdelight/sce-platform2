@@ -33,7 +33,8 @@ Table of Contents
 
 
 /* Document Ready State. 
-   Used: Global */	
+   Used: Global */
+function theme(){	
 jQuery(document).ready(function($)
 	{
 		"use strict";
@@ -672,7 +673,7 @@ jQuery(document).ready(function($)
 
 		
 });
-
+}
 
 // Device Touch Support Checker
 function isTouch() {

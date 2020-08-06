@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { JarwisService } from '../../service/jarwis.service';
 import { TokenService } from '../../service/token.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 import {FormBuilder, FormGroup, Validators, NgForm, FormControl} from "@angular/forms";
 declare var $: any;
 export interface Town {
@@ -35,7 +36,8 @@ export class ProfileComponent implements OnInit {
   image: any;
   datas: { formdata: any; };
   error: any;
-  constructor( private http: HttpClient,private formBuilder: FormBuilder,private Token: TokenService, private Jarwis: JarwisService,private router: Router) { }
+  constructor( private http: HttpClient,private formBuilder: FormBuilder,private Token: TokenService, private Jarwis: JarwisService,private router: Router,
+    public snackBar: MatSnackBar) { }
   public response:any;
   public form ={
     emails:'',
@@ -137,7 +139,11 @@ handleError(error) {
   this.sav= 'Update';
 }
 handleResponse(data) {  
-  this.router.navigateByUrl('/User/(side:Profile)');
+  window.location.reload();
+  let snackBarRef = this.snackBar.open("Updated Successfully", 'Dismiss', {
+    duration: 2000
+  }) 
+  this.router.navigateByUrl('/User/(side:Details)');
   this.disabled=false;
   this.sav= 'Updated';
 

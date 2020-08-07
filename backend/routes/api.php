@@ -35,6 +35,7 @@ Route::post('activity','ActivitiesController@store');
 Route::post('content','ContentController@store');
 Route::post('name_t','Name_titleController@store');
 Route::get('getact', 'ActivitiesController@index');
+Route::get('getactcat', 'ActivitiesController@getactcat');
 Route::post('movetrasha','ActivitiesController@movetrasha');
 Route::post('deleteact','ActivitiesController@deleteact');
 

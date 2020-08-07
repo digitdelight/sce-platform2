@@ -55,6 +55,9 @@ export class JarwisService {
   getcat() {
     return this.http.get<any>(`${this.baseUrl}/getcat`,)
   }
+  getactcat() {
+    return this.http.get<any>(`${this.baseUrl}/getactcat`,)
+  }
   profile() {
     return this.http.get<any>(`${this.baseUrl}/me`,{headers:{
       Authorization:`Bearer ${localStorage.token}`

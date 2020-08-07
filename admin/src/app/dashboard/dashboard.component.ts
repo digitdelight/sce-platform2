@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     this.Jarwis.getact().subscribe(
       data=>{
       
-      this.res = data;  
+      this.res = data; 
       
       }
     )
@@ -63,30 +63,30 @@ export class DashboardComponent implements OnInit {
    
     })
 
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
+    // var dropdown = document.getElementsByClassName("dropdown-btn");
+    // var i;
     
-    for (i = 0; i < dropdown.length; i++) {
-      dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } else {
-          dropdownContent.style.display = "block";
-        }
-      });
-    }
+    // for (i = 0; i < dropdown.length; i++) {
+    //   dropdown[i].addEventListener("click", function() {
+    //     this.classList.toggle("active");
+    //     var dropdownContent = this.nextElementSibling;
+    //     if (dropdownContent.style.display === "block") {
+    //       dropdownContent.style.display = "none";
+    //     } else {
+    //       dropdownContent.style.display = "block";
+    //     }
+    //   });
+    // }
   }
   
   // if(window.onclose()){
 
   // }
-  // @HostListener('window:loadend')
+  @HostListener('window:unload')
 
-  // async ngOnDestroy() {
-  //   localStorage.removeItem('token');
-  // }
+  async ngOnDestroy() {
+    localStorage.removeItem('token');
+  }
   // @HostListener('window:close', ['$event'])
   //   closeHandler(event) {
   //       window.sessionStorage.clear();
@@ -119,8 +119,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['contribute/']);
   }
   reload(){
-    window.location.reload();
-    return false;
+    this.router.navigate(['']);
     // this.ngOnInit();
    }
    

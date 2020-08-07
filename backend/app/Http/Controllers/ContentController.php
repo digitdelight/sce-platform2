@@ -166,9 +166,34 @@ class ContentController extends Controller
         $detcontents = $request->contents;
         $videodet = $request->videos;
         $request->merge(['video_name'=> $videodet]);
-         $files=$image_name[0];
-         $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-        Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+        if($image_name == NULL)
+        {
+            $content= title::create($request-> all());
+        $request->merge(['title_id'=>$content->id]);
+        Videos::create($request-> all());
+
+            $contentData=[];
+                 $file=$item['c_image'];
+                 
+                    $files=$image_name[0];
+                     $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
+                    Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+                  $contentData[] =[
+                  'header'=>$item['header'],
+                  'content' =>$item['content'],
+                  'quote'=>$item['quote'],
+                  'name_id' => $content->id,
+                  'c_image' =>$filename
+                  ] ; 
+             
+           
+              Content::insert($contentData);
+               return $contentData;
+        } else {
+            $files=$image_name[0];
+            $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
+            Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+       
        
         $request->merge(['t_image'=>$filenames]);
    
@@ -212,6 +237,7 @@ foreach ($image_name as $img) {
       
          Content::insert($contentData);
           return $contentData;
+        }
 
 //    $videoName=[];
 // $count = 0;

@@ -22,7 +22,12 @@ class ActivitiesController extends Controller
         //Addtype::all()
         return response()->json(Activities::where('status','Y')->get());
     }
-
+    public function getactcat(){
+        return response()->json([
+           'act'=>Activities::where('status','Y')->get(),
+           'cat'=>Category::where('status', 'Y')->get()
+        ]);
+    }
     public function movetrasha(Request $request)
     {
     $id=$request[0];

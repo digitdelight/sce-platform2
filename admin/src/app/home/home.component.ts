@@ -40,17 +40,9 @@ p:any;
   edittedpost:any;
   content:any;
   respo:any;
-  selectedid:any;
+  public selectedid:any;
   constructor(private formBuilder:FormBuilder,private Jarwis: JarwisService,private router: Router,private mapserver: MapServiceService, private coordGet: MapServiceService,public snackBar: MatSnackBar) { }
-  dataChanged(event){
-    this.catForm.value.category_id=event
-   this.id=this.catForm.value.category_id.category_id
-     this.Jarwis.post(this.id).subscribe(data=>{
-        this.respo = data;
-     
-     
-      })
-  }
+
   public lat;
   data: any;
   newArr = [];
@@ -58,6 +50,7 @@ p:any;
   public marker;
   public fakerIt = [];
   public posts=[];
+  public act:any;
   public cat:any;
   // public form = {
   //   category_id: null,
@@ -85,6 +78,12 @@ p:any;
     quote:null
   }); 
   }
+  getcat(){
+    let act = this.act.cat;
+    let cat = act.filter(y=>y.activities_id == this.selectedid);
+    this.cat = cat;
+    
+  }
  onSubmit(){
    console.log(this.catForm.value.image);
    this.content=[{header:this.catForm.value.name_title, content:this.catForm.value.contents,quote: this.catForm.value.quote, c_image:this.catForm.value.image}]
@@ -97,23 +96,28 @@ p:any;
     //   this.disabled=true;
     // this.sav= 'Posting';
  }
- uploadFiles(event){
-  let files =event.target.files;
-  if (files){
-    for(let file of files){
-      let reader= new FileReader();
-      let vm = this;
-      reader.onload =()=> {
-       this.img.push(reader.result);
-      
-      }
-      reader.readAsDataURL(file);
-      
+ uploadFile(event){
+  let files =event.target.files[0];
+  let reader = new FileReader();
+  let vm = this;
+  reader.onloadend =()=> {
+    // body...
+    this.catForm.value.image = [];
+     this.catForm.value.image.push(reader.result);
+ 
   }
+  reader.readAsDataURL(files);
+}
+uploadFiles(event){
+  let files =event.target.files[0];
+  let reader = new FileReader();
+  let vm = this;
+  reader.onloadend =()=> {
+    // body...
+    this.catForm.value.image = reader.result;
+ 
   }
-  this.catForm.value.image = this.img;
-  // console.log(event)
-  // console.log(this.form.image)
+  reader.readAsDataURL(files);
 }
   gets(){
     this.Jarwis.geturl().subscribe(
@@ -164,10 +168,10 @@ p:any;
          console.log(error.error);
        }
      )
-     this.Jarwis.getact().subscribe(
+     this.Jarwis.getactcat().subscribe(
       data=>{
       
-      this.cat = data;  
+      this.act = data;  
       
       })
   }

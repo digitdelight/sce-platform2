@@ -18,7 +18,7 @@ export interface Town {
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
- 
+ sav:any;
   public form = {
     email: null,
     firstname: null,
@@ -36,7 +36,6 @@ export class SigninComponent implements OnInit {
   };
   disable= "disabled";
   disabled= true;
-  sav = 'Register';
   public error: any;
   public gender;
   response: Object;
@@ -56,6 +55,13 @@ export class SigninComponent implements OnInit {
       {value: 'Egba', viewValue: 'Egba'},
       {value: 'Ota', viewValue: 'Ota'}
     ];
+
+    ngOnInit() {   
+      this.displayroleuser()
+      this.sav = "Register";
+    
+  }
+
     onSubmit() {
      
       this.form.role_id=1
@@ -95,12 +101,5 @@ export class SigninComponent implements OnInit {
         }
       )
     }    
- 
-  ngOnInit() {   
-    this.displayroleuser()
-    
-  
-}
-
 
 }

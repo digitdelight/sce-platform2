@@ -43,6 +43,7 @@ import { ModalComponent } from './modal/modal.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ContributeComponent } from './contribute/contribute.component';
 import { EditcontributeComponent } from './editcontribute/editcontribute.component';
+// import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [

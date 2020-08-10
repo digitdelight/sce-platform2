@@ -295,6 +295,9 @@ foreach ($image_name as $img) {
         ->update(['status' =>'E','t_image'=>$request->t_image]);
     }
     $imageName=[];
+    if($image_name == NULL){
+
+    } else {
 $count = 0;
 foreach ($image_name as $img) {
         $file=$img;
@@ -308,6 +311,7 @@ foreach ($image_name as $img) {
     $count++;
 }
   $gally= Galleries::insert($imageName);
+    }
     $updatetitle=DB::table('titles')
     ->where('id', $id)
     ->update(['status' =>'E','name_title'=>$name_title]); 
@@ -321,7 +325,7 @@ foreach ($image_name as $img) {
     }
     // return $updatetitle;
     
-    if($updatetitle || $gally ||updates){
+    if($updatetitle || $gally || $updates){
         return $id;
     }else{
         return '
@@ -338,6 +342,24 @@ foreach ($image_name as $img) {
     $updatetitle=DB::table('titles')
     ->where('id', $id)
     ->update(['status' =>'Y']); 
+  
+     return $updatetitle;
+    // if($update){
+    //     return '
+    //         "success":"true"
+    //     ';
+    // }
+    }
+
+    public function updatetrash(Request $request)
+    {
+    $id=$request->id;
+     
+    // return $id;
+   
+    $updatetitle=DB::table('titles')
+    ->where('id', $id)
+    ->update(['status' =>'N']); 
   
      return $updatetitle;
     // if($update){

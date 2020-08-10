@@ -36,6 +36,9 @@ export class JarwisService {
   updatelive(data) {
     return this.http.post(`${this.baseUrl}/updatelive`, data)
   }
+  updatetrash(data) {
+    return this.http.post(`${this.baseUrl}/updatetrash`, data)
+  }
   content(data) {
     return this.http.post<any>(`${this.baseUrl}/content`, data,{headers:{
       Authorization:`Bearer ${localStorage.token}`

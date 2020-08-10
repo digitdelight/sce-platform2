@@ -40,6 +40,28 @@ contents:null,
   public items = [];
   image: any;
   constructor(private Jarwis: JarwisService, private router: Router, private formBuilder: FormBuilder,public snackBar: MatSnackBar,private coordGet: MapServiceService ) { }
+  ngOnInit() {
+    this.Jarwis.getact().subscribe(
+      data=>{
+     
+      this.res = data;  
+      
+      console.log(this.res)
+      }
+    )
+    this.orderForm =  this.formBuilder.group({
+      header: '',
+      content: '',
+      quote: '',
+       c_image:''
+    }); 
+    this.orderForm2 =  this.formBuilder.group({
+      header: '',
+      content: '',
+      quote: '',
+       c_image:''
+    }); 
+  } 
   dataChanged(event){
     this.form.category_id=event
    this.id=this.form.category_id
@@ -129,15 +151,6 @@ if(this.items.length == 0){
   getLength(): Number{
     return this.items.length
   }
-  // saver():void{
-  //   if(this.items.length)
-  //   let header = this.orderForm.value.header;
-  //   let content = this.orderForm.value.content;
-  //   let c_image=this.orderForm.value.c_image;
-  //   let quote=this.orderForm.value.quote;
-  //     let id = this.items.length;
-  //     this.items= [{id: id,header: header, content: content, c_image : c_image, quote: quote}]; 
-  // }
   addItem(): void{
     let header = this.orderForm2.value.header;
     let content = this.orderForm2.value.content;
@@ -157,9 +170,6 @@ if(this.items.length == 0){
       })
     }
   }
-
- 
-
   deleteItem(id): void{
     for (let i = 0; i < this.items.length; i++) {
       if(this.items[i].id == id){
@@ -179,25 +189,6 @@ if(this.items.length == 0){
     }
     reader.readAsDataURL(files);
   }
-  uploadVideos(event){
-    let files =event.target.files;
-    if (files){
-      for(let file of files){
-        this.video.push(file.name);
-        // let reader= new FileReader();
-        // let vm = this;
-        // reader.onload =()=> {
-        //  this.video.push(reader.result);
-        
-        // }
-        // reader.readAsDataURL(file);
-        
-    }
-    }
-    this.form.videos =this.video;
-    // console.log(event)
-    console.log(this.form.videos)
-  }
   uploadFiles(event){
     let files =event.target.files;
     if (files){
@@ -216,43 +207,6 @@ if(this.items.length == 0){
     // console.log(event)
     // console.log(this.form.image)
   }
-  ngOnInit() {
-
-    (function($) {
-      "use strict";
-      $('#summernote').summernote({
-        height: 200,
-        styleTags: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-      });
-      $(".js-example-basic").select2();
-      $(".flatpickr").flatpickr();
-      var elem = document.querySelector('.js-switch');
-      var init = new Switchery(elem);
-    })(jQuery);
-    
-    
-      this.Jarwis.getact().subscribe(
-        data=>{
-       
-        this.res = data;  
-        
-        console.log(this.res)
-        }
-      )
-      this.orderForm =  this.formBuilder.group({
-        header: '',
-        content: '',
-        quote: '',
-         c_image:''
-      }); 
-      this.orderForm2 =  this.formBuilder.group({
-        header: '',
-        content: '',
-        quote: '',
-         c_image:''
-      }); 
-    } 
-   
   
   getCoord(coord) {
     this.coordGet.getLocality(coord).subscribe(data=>{

@@ -7,18 +7,15 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"><a class="nav-link active" href="#forum" aria-controls="forum" role="tab" data-toggle="tab">Story</a></li>
-                <li class="nav-item"><a class="nav-link" href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab">Image</a></li>
-                <li class="nav-item"><a class="nav-link" href="#videos" aria-controls="videos" role="tab" data-toggle="tab">Video</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="#options" aria-controls="options" role="tab" data-toggle="tab">Stream</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="#options" aria-controls="options" role="tab" data-toggle="tab">Options</a></li> -->
               </ul>
     
               <form class="tab-content p-t-20">
                 <div class="tab-pane active" id="forum" role="tabpanel">
+                  <small><b>*</b>- Required</small><br>
                   <!-- form -->
                   <mat-form-field>
                     <mat-label>Select to contribute</mat-label>
-                    <mat-select [(ngModel)]="selectedid" name="category_id" (ngModelChange)="dataChanged($event)">
+                    <mat-select [(ngModel)]="selectedid" name="category_id" (ngModelChange)="dataChanged($event)" required>
                       <mat-option value="" selected></mat-option>
                       <mat-option *ngFor="let r of res" [value]="r.id">
                         {{r.actname}}
@@ -29,7 +26,7 @@
                     <!-- <label for="submit-location">Category</label><br> -->
                 <mat-form-field>
                     <mat-label>Category</mat-label>
-                    <mat-select [(ngModel)]="form.category_id" name="category_id">
+                    <mat-select [(ngModel)]="form.category_id" name="category_id" required>
                       <mat-option value="" selected></mat-option>
                       <mat-option *ngFor="let cat of response" [value]="cat.id">
                         {{cat.catname}}
@@ -102,69 +99,31 @@
           </div>
         <input type="button"  class="btn btn-primary btn-sm" (click)="deleteItem(i.id)" value="Remove Details">
 
-  </div></div></div>
+  </div>
+</div>
+</div>
+  <div class="col-md-12 col-sm-12">
+    <div class="form-group">
+        <label for="submit-area">Gallery *</label>
+        <div class="input-group">
+            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="Browse Images" (change)="uploadFiles($event)">
+            <!-- <span class="input-group-addon">m<sup>2</sup></span> -->
+        </div>
+    </div>
 
-
- <button class="btn btn-default  btn-rounded btn-shadow float-right" (click)="addItem()">Save and Add New content</button>                               
+    <div class="form-group">
+      <label for="description">Video Link <small>(Not Compulsory)</small></label>
+      <input type="text" class="form-control" id="description" placeholder="Enter video link" [(ngModel)]="form.videos" name="videos" >
+    </div>
+    <button type="submit" (click)="onSubmit()" [disabled]= "disabled" class="btn btn-default btn-rounded btn-shadow float-right" >
+      <i id="loader2" *ngIf="disabled"  class="fa fa-spin fa-spinner"></i> {{sav}}</button>
+      
+ <button class="btn btn-default  btn-rounded btn-shadow float-right" (click)="addItem()">Add Extra Story</button>                               
 
                 </div>
-                <div class="tab-pane" id="gallery" role="tabpanel">
-                  <!-- <div class="form-group row">
-                    <div class="col-6">
-                      <label for="date">Publish Date:</label>
-                      <input type="text" class="form-control flatpickr flatpickr-input active" id="date" placeholder="Pick a date">
-                    </div>
-                  </div> -->
-
-                  <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <label for="submit-area">Gallery</label>
-                        <div class="input-group">
-                            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="Browse Images" (change)="uploadFiles($event)">
-                            <!-- <span class="input-group-addon">m<sup>2</sup></span> -->
-                        </div>
-                    </div><!-- /.form-group -->
-                </div>
-                  <!-- <div class="form-group">
-                    <label for="">Enable Replies</label>
-                    <div><input type="checkbox" class="js-switch" checked></div>
-                  </div> -->
              
                 </div>
-                <div class="tab-pane" id="videos" role="tabpanel">
-                 
-                  <!-- <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                        <label for="submit-area">Videos</label>
-                        <div class="input-group">
-                            <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="video/mp4" data-browse-class="btn btn-default" data-browse-label="Browse Videos" (change)="uploadVideos($event)">
-                        </div>
-                    </div>
-                    
-                </div> -->
-                <div class="form-group">
-                  <label for="description">Video Link</label>
-                  <input type="text" class="form-control" id="description" placeholder="Enter video link" [(ngModel)]="form.videos" name="videos" >
-                </div>
-                <button type="submit" (click)="onSubmit()" [disabled]= "disabled" class="btn btn-default btn-rounded btn-shadow float-right" >
-                  <i id="loader2" *ngIf="disabled"  class="fa fa-spin fa-spinner"></i> {{sav}}</button>
-                </div>
-                <div class="tab-pane" id="options" role="tabpanel">
-                 
-
-                  
-                  <div class="form-group">
-                    <label for="">Enable Replies</label>
-                    <div><input type="checkbox" class="js-switch" checked></div>
-                  </div>
-                </div>
-                <div class="m-t-30">
-
-                        
-                  <!-- <button class="btn btn-primary btn-rounded btn-shadow float-right" type="submit" name="save">Submit</button> -->
-
-            
-                </div>
+              
               </form>
             </div>
           </div>

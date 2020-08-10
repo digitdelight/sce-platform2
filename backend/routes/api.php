@@ -66,6 +66,7 @@ Route::get('getalledittedpost','DisplayController@getalledittedpost');
 Route::get('getcontent/{id}','ContentController@getcontent');
 Route::post('updatecontent','ContentController@update');
 Route::post('updatelive','ContentController@updatelive');
+Route::post('updatetrash','ContentController@updatetrash');
 Route::get('getcontentonly/{id}','ContentController@getcontentonly');
 Route::get('getcat', 'CategoryController@index');
 Route::get('post/{id}','ContentController@getactid');

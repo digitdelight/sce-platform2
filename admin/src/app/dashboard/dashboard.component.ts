@@ -3,9 +3,10 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { JarwisService } from '../service/jarwis.service';
 import { TokenService } from '../service/token.service';
+// import { BnNgIdleService } from 'bn-ng-idle';
 declare let jQuery: any;
 declare let $ : any;
-// declare let particlesJS : any;
+declare let themeJS : any;
 
 @Component({
   selector: 'app-dashboard',
@@ -24,11 +25,18 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private Jarwis: JarwisService,
     private Token: TokenService,
+    // private bnIdle:BnNgIdleService
   ) { }
 
   ngOnInit() {
+    // this.bnIdle.startWatching(30).subscribe((isTimedOut:boolean)=>{
+    //   if(isTimedOut){
+    //     localStorage.removeItem('token');
+    //     alert("session Timeout");
+    //   }
+    // }
+    // )
     new jQuery();
-    // new theme();
     
     this.Jarwis.geturl().subscribe(
       data=>{
@@ -82,11 +90,11 @@ export class DashboardComponent implements OnInit {
   // if(window.onclose()){
 
   // }
-  @HostListener('window:unload')
+  // @HostListener('window:unload')
 
-  async ngOnDestroy() {
-    localStorage.removeItem('token');
-  }
+  // async ngOnDestroy() {
+  //   localStorage.removeItem('token');
+  // }
   // @HostListener('window:close', ['$event'])
   //   closeHandler(event) {
   //       window.sessionStorage.clear();

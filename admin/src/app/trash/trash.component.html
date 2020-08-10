@@ -30,15 +30,16 @@
 
           </div>
           <div class="panel-body  table-responsive">
+            <h5> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> Trashed Post: {{resa.length}} </h5>
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Username</th>
                   <th>Date Posted</th>
-                  <th>Tag</th>
+                  <th>Sub-category</th>
                   <th>Status</th>
+                  <th>Tag</th>
                   <th>Action</th>
                 </tr> 
               </thead>
@@ -50,51 +51,102 @@
                   <td class="center">{{t.catname}}</td>
                   <td class="center"> <span class="label label-default" *ngIf ="t.status=== 'T'">Trash</span>
                   </td>
+                  <td>Post</td>
                   <td class="menu-action rounded-btn" >
-                    <a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashp(t.id)"> <i class="fa fa-undo"></i> </a> 
+                    <a data-original-title="view" title="Undo" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashp(t.id)"> <i class="fa fa-undo"></i> </a> 
 
-                                                      <a data-original-title="edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="navigate(t.id)"> <i class="fa fa-pencil"></i> </a> 
-                                                      <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red" (click)="deletep(t.id)"> <i class="fa fa-times"></i> </a></td>
+                                                      <a data-original-title="edit" title="Edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="navigate(t.id)"> <i class="fa fa-pencil"></i> </a> 
+                                                      <a data-original-title="delete" title="Delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red" (click)="deletep(t.id)"> <i class="fa fa-times"></i> </a></td>
                 </tr>   
+              </tbody>
+            </table>
+            <br>
+            <h5> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> Trash User: {{res.length}} </h5>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Date Posted</th>
+                  <th>role</th>
+                  <th>Status</th>
+                  <th>Tag</th>
+                  <th>Action</th>
+                </tr> 
+              </thead>
+              <tbody>
                 <tr *ngFor="let u of res">
                   <td>{{u.id}}</td>
                   <td>{{u.firstname}} {{u.middlename}} {{u.lastname}}</td>
                   <td class="center">{{u.updated_at}}</td>
-                  <td class="center">{{u.role_id}}</td>
+                  <td class="center">{{u.role}}</td>
                   <td class="center"> <span class="label label-default" *ngIf ="u.status=== 'T'">Trash</span>
                   </td>
-                  <td class="menu-action rounded-btn" ><a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashu(t.id)"> <i class="fa fa-undo"></i> </a> 
-                                                      <a data-original-title="edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrashu(u.id)"> <i class="fa fa-pencil"></i> </a> 
-                                                      <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deleteu(u.id)"> <i class="fa fa-times"></i> </a></td>
+                  <td>User</td>
+                  <td class="menu-action rounded-btn" ><a data-original-title="view" title="Undo" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashu(u.id)"> <i class="fa fa-undo"></i> </a> 
+                                                      <a data-original-title="edit" title="Edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrashu(u.id)"> <i class="fa fa-pencil"></i> </a> 
+                                                      <a data-original-title="delete" title="Delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deleteu(u.id)"> <i class="fa fa-times"></i> </a></td>
                 </tr>    
+              </tbody>
+            </table>
+            <br>
+            <h5> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> Trash Category: {{resp.length}} </h5>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Date Posted</th>
+                  <th>Status</th>
+                  <th>Tag</th>
+                  <th>Action</th>
+                </tr> 
+              </thead>
+              <tbody>  
                 <tr *ngFor="let a of resp">
                   <td>{{a.id}}</td>
                   <td>{{a.actname}}</td>
                   <td class="center">{{a.updated_at}}</td>
-                  <td class="center"></td>
                   <td class="center"> <span class="label label-default" *ngIf ="a.status=== 'T'">Trash</span>
                   </td>
-                  <td class="menu-action rounded-btn" ><a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrasha(t.id)"> <i class="fa fa-undo"></i> </a> 
-                                                      <a data-original-title="edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrasha(a.id)"><i class="fa fa-pencil"></i> </a> 
+                  <td>Activities</td>
+                  <td class="menu-action rounded-btn" >
+                    <a data-original-title="view" title="Undo" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrasha(a.id)"> <i class="fa fa-undo"></i> </a> 
+                                                      <a data-original-title="edit" title="Edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrasha(a.id)"><i class="fa fa-pencil"></i> </a> 
                                                       <!-- <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="opencomformed()"> <i class="fa fa-times"></i> </a></td> -->
                                                       
-                                                      <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deletea(a.id)"> <i class="fa fa-times"></i> </a></td>
+                                                      <a data-original-title="delete" title="Delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deletea(a.id)"> <i class="fa fa-times"></i> </a></td>
                 </tr>  
+              </tbody>
+            </table>
+            <br>
+            <h5 > <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> Trash Sub Category: {{respo.length}} </h5>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Date Posted</th>
+                  <th>Status</th>
+                  <th>Tag</th>
+                  <th>Action</th>
+                </tr> 
+              </thead>
+              <tbody>  
                 <tr *ngFor="let c of respo">
                   <td>{{c.id}}</td>
                   <td>{{c.catname}}</td>
                   <td class="center">{{c.updated_at}}</td>
-                  <td class="center"></td>
                   <td class="center"> <span class="label label-default" *ngIf ="c.status=== 'T'">Trash</span>
                   </td>
-                  <td class="menu-action rounded-btn" ><a data-original-title="view" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashc(t.id)"> <i class="fa fa-undo"></i> </a> 
-                                                      <a data-original-title="edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrashc(c.id)"> <i class="fa fa-pencil"></i> </a> 
-                                                      <a data-original-title="delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deletec(c.id)"> <i class="fa fa-times"></i> </a></td>
+                  <td>Categories</td>
+                  <td class="menu-action rounded-btn" ><a data-original-title="view" title="Undo" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-green" (click)="movetrashc(c.id)"> <i class="fa fa-undo"></i> </a> 
+                                                      <a data-original-title="edit" title="Edit" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-yellow"  (click)="movetrashc(c.id)"> <i class="fa fa-pencil"></i> </a> 
+                                                      <a data-original-title="delete" title="Delete" data-toggle="tooltip" data-placement="top" class="btn menu-icon vd_bg-red"  (click)="deletec(c.id)"> <i class="fa fa-times"></i> </a></td>
                 </tr>           
 
               </tbody>
             </table>
-          
           </div>
         </div>
         <!-- Panel Widget --> 

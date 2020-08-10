@@ -245,7 +245,9 @@ class DisplayController extends Controller
     public function usertrashtitle()
     {
         return response()->json(
-           User::orderBy('id', 'desc')->where('status','=','T')
+           User::orderBy('id', 'desc')->join('roles','users.role_id','=','roles.id')
+           ->select('users.*','roles.name as role')
+           ->where('status','=','T')
             ->get()
     
     );

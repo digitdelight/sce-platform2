@@ -5,6 +5,7 @@ import { MapServiceService } from '../map-service.service';
 
 import {MatDialog} from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-trash',
@@ -13,7 +14,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class TrashComponent implements OnInit {
   resa: any;
-  snackBar: any;
+  // snackBar: any;
   lenght: any;
                                             
   res: any;
@@ -24,7 +25,7 @@ export class TrashComponent implements OnInit {
   lengh: any;
   len: any;
 
-  constructor(private Jarwis: JarwisService,private router: Router,private mapserver: MapServiceService, private coordGet: MapServiceService,public dialog: MatDialog) { }
+  constructor(private Jarwis: JarwisService,private router: Router,private mapserver: MapServiceService, private coordGet: MapServiceService,public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -63,23 +64,46 @@ this.Jarwis.getcattrashtitle().subscribe(
   navigate(id){
  this.router.navigate(['edit/'+id+'']);
   }
+  gettrashpopulation(){
+    this.Jarwis.getalltrashtitle().subscribe(
+      data=>{
+      this.resa = data;    
+      this.len= this.resa.length  
+      this.leng= this.respo.length+this.resp.length+this.res.length+this.resa.length  
+  // console.log('here', this.leng )
+   })
+  }
   movetrashp(id){
-    
-    // this.router.navigate(['edit/'+id+'']);
-    this.Jarwis.updatelive({id:id}).subscribe(
-      data =>{
-        let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
-          duration: 2000
-        }) 
-      });
+    // this.Jarwis.updatelive({id:id}).subscribe(
+    //   data =>{
+    //     this.gettrashpopulation();
+    //     let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
+    //       duration: 2000
+    //     }) 
+    //   });
+      this.Jarwis.updatetrash({id:id}).subscribe(
+        data =>{
+          this.gettrashpopulation();
+          let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
+            duration: 2000
+          }) 
+        });
     this.ngOnInit()
   }
+  getUserTrash(){
+    this.Jarwis.getusertrashtitle().subscribe(
+      data=>{
+      this.res = data;    
+      // this.leng= this.respo.length+this.resp.length+this.res.length+this.resa.length  
+    // console.log('here', this.leng )
+      
+   })
+  }
   movetrashu(id){
-    console.log(id)
     // this.router.navigate(['edit/'+id+'']);
     this.Jarwis.movetrashuser(id).subscribe(
       data =>{
-        console.log(data)
+        this.getUserTrash();
         let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
           duration: 2000
         }) 
@@ -96,22 +120,44 @@ this.Jarwis.getcattrashtitle().subscribe(
     });
   this.ngOnInit()
   }
+  gettrashactivities(){
+    this.Jarwis.getacttrashtitle().subscribe(
+      data=>{
+      this.resp = data;    
+      this.lengh= this.resp.length  
+      // this.leng= this.respo.length+this.resp.length+this.res.length+this.resa.length  
+      // console.log('here', this.leng )
+      
+    })
+  }
   movetrasha(id){
     
     // this.router.navigate(['edit/'+id+'']);
     this.Jarwis.movetrashact(id).subscribe(
       data =>{
+        this.gettrashactivities();
         let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
           duration: 2000
         }) 
       });
     this.ngOnInit()
   }
+  gettrashcat(){
+    this.Jarwis.getcattrashtitle().subscribe(
+      data=>{
+      this.respo = data;    
+      this.lenght= this.respo.length  
+      // this.leng=this.respo.length+this.resp.length+this.res.length+this.resa.length 
+      // console.log('here', this.leng )
+      
+    })
+  }
   movetrashc(id){
     
     // this.router.navigate(['edit/'+id+'']);
     this.Jarwis.movetrashcat(id).subscribe(
       data =>{
+        this.gettrashcat();
         let snackBarRef = this.snackBar.open("Moved Successfully", 'Dismiss', {
           duration: 2000
         }) 

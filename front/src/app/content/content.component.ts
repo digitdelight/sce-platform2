@@ -77,6 +77,7 @@ id: any;
   public responses:any;
   uid:any;
   user_id: any;
+  sharepath:any;
 constructor(private Jarwis: JarwisService, private Auth: AuthService, private formBuilder: FormBuilder,public snackBar: MatSnackBar,private router: Router, public actRoute: ActivatedRoute, private coordGet: MapServiceService,private dialog?: MatDialog,) { }
 @ViewChild('map') mapElement: any;
 
@@ -124,6 +125,8 @@ handleError(error) {
  
     
   ngOnInit() {
+    this.sharepath = this.Jarwis.getcurrentroute();
+  
     this.Auth.authStatus.subscribe(value => this.loggedIn = value);
     this.Jarwis.profile().subscribe(
       data=>{

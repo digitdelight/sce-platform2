@@ -11,6 +11,10 @@ export class JarwisService {
   private baseUrl = 'http://localhost/sce-platform2/backend/public/api';
 
   constructor(private http: HttpClient) { }
+  getcurrentroute(){
+    return "https://platform/hamorah.com";
+  }
+
   geturl(){
     return this.http.get(`${this.baseUrl}/geturl`);
   }

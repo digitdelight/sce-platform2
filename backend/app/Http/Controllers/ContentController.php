@@ -177,7 +177,7 @@ class ContentController extends Controller
                  
                     $files=$image_name[0];
                      $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-                    Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+                    Image::make($files)->save(public_path('/upload/uploads/'.$filenames));
                   $contentData[] =[
                   'header'=>$item['header'],
                   'content' =>$item['content'],
@@ -192,7 +192,7 @@ class ContentController extends Controller
         } else {
             $files=$image_name[0];
             $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-            Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+            Image::make($files)->save(public_path('/upload/uploads/'.$filenames));
        
        
         $request->merge(['t_image'=>$filenames]);
@@ -206,7 +206,7 @@ foreach ($image_name as $img) {
         $file=$img;
        $filename=$count.'.'.time().'.' . explode('/', explode(':', substr($file, 0, strpos($file,';')))[1])[1];
     
-        Image::make($file)->resize(300, 300)->save(public_path('/upload/uploads/'.$filename));
+        Image::make($file)->save(public_path('/upload/uploads/'.$filename));
     $imageName[] =[
      'title_id' => $content->id,
    'image_name'=> $filename,
@@ -223,7 +223,7 @@ foreach ($image_name as $img) {
             
             $filename=$counts.''.time().'.' . explode('/', explode(':', substr($file, 0, strpos($file,';')))[1])[1];
          
-             Image::make($file)->resize(300, 300)->save(public_path('/upload/uploads/'.$filename));
+             Image::make($file)->save(public_path('/upload/uploads/'.$filename));
             }
              $contentData[] =[
              'header'=>$item['header'],
@@ -287,12 +287,12 @@ foreach ($image_name as $img) {
         $file=$request->t_image;
         $filename=time().'.' . explode('/', explode(':', substr($file, 0, strpos($file,';')))[1])[1];
      
-        Image::make($file)->resize(300, 300)->save(public_path('/upload/uploads/'.$filename));
+        Image::make($file)->save(public_path('/upload/uploads/'.$filename));
        
         $request->merge(['t_image'=>$filename]);
         $updatet=DB::table('titles')
         ->where('id', $id)
-        ->update(['status' =>'E','t_image'=>$request->t_image]);
+        ->update(['status' =>'E','t_image'=>$request->t_image, 'updated_at'=>now()]);
     }
     $imageName=[];
     if($image_name == NULL){
@@ -303,10 +303,11 @@ foreach ($image_name as $img) {
         $file=$img;
        $filename=$count.'.'.time().'.' . explode('/', explode(':', substr($file, 0, strpos($file,';')))[1])[1];
     
-        Image::make($file)->resize(300, 300)->save(public_path('/upload/uploads/'.$filename));
+        Image::make($file)->save(public_path('/upload/uploads/'.$filename));
     $imageName[] =[
      'title_id' => $id,
    'image_name'=> $filename,
+    'updated_at'=>now()
     ] ; 
     $count++;
 }
@@ -314,13 +315,13 @@ foreach ($image_name as $img) {
     }
     $updatetitle=DB::table('titles')
     ->where('id', $id)
-    ->update(['status' =>'E','name_title'=>$name_title]); 
+    ->update(['status' =>'E','name_title'=>$name_title, 'updated_at'=>now()]); 
     foreach ($detcontents as $item) {
        $updates = DB::table('contents')
                     ->where([
                         ['id','=',$item['id']]
                     ])
-                    ->update(array('header' => $item['header'], 'content' => $item['content']));
+                    ->update(array('header' => $item['header'], 'content' => $item['content'], 'updated_at'=>now()));
     
     }
     // return $updatetitle;

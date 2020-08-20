@@ -55,7 +55,7 @@ class ContributeController extends Controller
         if($image){
             $files=$image;
             $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-           Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+           Image::make($files)->save(public_path('/upload/uploads/'.$filenames));
           
            $request->merge(['c_image'=>$filenames]);
         }
@@ -81,7 +81,7 @@ class ContributeController extends Controller
         // return $request;
             $files=$image;
             $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-           Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+           Image::make($files)->save(public_path('/upload/uploads/'.$filenames));
           
            $request->merge(['image_name'=>$filenames]);
       
@@ -130,7 +130,7 @@ class ContributeController extends Controller
         if($image){
             $files=$image;
             $filenames=time().'.' . explode('/', explode(':', substr($files, 0, strpos($files,';')))[1])[1];
-           Image::make($files)->resize(300, 300)->save(public_path('/upload/uploads/'.$filenames));
+           Image::make($files)->save(public_path('/upload/uploads/'.$filenames));
           
            $request->merge(['c_image'=>$filenames]);
         }

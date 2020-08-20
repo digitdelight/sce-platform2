@@ -53,6 +53,7 @@ Route::get('displaytimeline','DisplayController@displaytimelinebyuser');
 Route::get('displaygallery','DisplayController@displaygallery');
 Route::get('displayactbytitle','DisplayController@displayactbytitle');
 Route::get('getalltitle','DisplayController@getalltitle');
+Route::get('getallrecenttitle','DisplayController@getallrecenttitle');
 Route::get('getalladmintitle','DisplayController@getalladmintitle');
 Route::get('getfootertitle','DisplayController@getfootertitle');
 Route::get('search/{searchTerm}','DisplayController@search');

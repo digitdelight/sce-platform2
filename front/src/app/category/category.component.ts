@@ -58,7 +58,9 @@ export class CategoryComponent implements OnInit {
     this.actRoute.paramMap.subscribe((params => {
       let id = params.get('id');
       this.actid = id;
+      alert("before");
       this.Jarwis.gettitles({id:this.actid, user_id:this.id}).subscribe(data=>{
+        alert("after");
         this.response = data;
         this.loading=false;
         this.actname=this.response.acti[0].actname
@@ -74,6 +76,26 @@ export class CategoryComponent implements OnInit {
     
         }));
       });
+      if(!this.loggedIn){
+        this.actRoute.paramMap.subscribe((params => {
+          let id = params.get('id');
+          this.actid = id;
+      this.Jarwis.gettitles({id:this.actid, user_id:this.id}).subscribe(data=>{
+        this.response = data;
+        this.loading=false;
+        this.actname=this.response.acti[0].actname
+        this.title=this.response.title
+        this.cat=this.response.cat
+       
+        // this.id4=this.resnh.id
+        this.lenght= this.title.length
+        // console.log(this.lenght)
+        // console.log(this.response)
+     
+      })
+    }));
+    }
+    
         this.Jarwis.getfootertitle().subscribe(
           data=>{
           this.ftitle = data; 
@@ -101,25 +123,27 @@ export class CategoryComponent implements OnInit {
   }
   
   navigates(id){
-    this.token=localStorage.getItem('token');
-    //  console.log(this.token)
-  if(this.token == null){
-    this.router.navigate(['Login']);
-  }else
-  {    this.router.navigate(['Category/'+id+'']);
+  //   this.token=localStorage.getItem('token');
+  //   //  console.log(this.token)
+  // if(this.token == null){
+  //   this.router.navigate(['Login']);
+  // }else
+  // {  
+      this.router.navigate(['Category/'+id+'']);
       this.ngOnInit()
-    }
+    // }
     
   }
   navigate(id){
-    this.token=localStorage.getItem('token');
-    //  console.log(this.token)
-  if(this.token == null){
-    this.router.navigate(['Login']);
-  }else
-  {    this.router.navigate(['Content/'+id+'']);
+  //   this.token=localStorage.getItem('token');
+  //   //  console.log(this.token)
+  // if(this.token == null){
+  //   this.router.navigate(['Login']);
+  // }else
+  // {   
+     this.router.navigate(['Content/'+id+'']);
       this.ngOnInit()
-    }
+    // }
     
   }
 
@@ -235,14 +259,16 @@ export class CategoryComponent implements OnInit {
           }
 
           nav(id){
-            this.token=localStorage.getItem('token');
-            //  console.log(this.token)
-          if(this.token == null){
-            this.router.navigate(['Login']);
-          }else
-          {    this.router.navigate(['Content/'+id+'']);
+          //   this.token=localStorage.getItem('token');
+          //   //  console.log(this.token)
+          // if(this.token == null){
+          //   this.router.navigate(['Login']);
+          // }else
+          // { 
+            // alert("here");
+               this.router.navigate(['Content/'+id+'']);
               this.ngOnInit()
-            }
+            // }
             
           }
 

@@ -107,6 +107,9 @@ export class JarwisService {
   getalladmintitle() {
     return this.http.get<any>(`${this.baseUrl}/getalladmintitle`,)
   }
+  getallrecenttitle() {
+    return this.http.get<any>(`${this.baseUrl}/getallrecenttitle`,)
+  }
   getfootertitle() {
     return this.http.get<any>(`${this.baseUrl}/getfootertitle`,)
   }

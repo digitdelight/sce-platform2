@@ -124,7 +124,7 @@ class AuthController extends Controller
             $file=$request->image;
             $filename=time().'.' . explode('/', explode(':', substr($file, 0, strpos($file,';')))[1])[1];
            // $filename= time().'.'.$file->getClientOriginalExtension();
-            Image::make($file)->resize(300, 300)->save(public_path('/upload/uploads/'.$filename));
+            Image::make($file)->save(public_path('/upload/uploads/'.$filename));
            //$user=auth()->user();
             // $datas->merge(['image'=>$filename]);
             $user->image = $filename;

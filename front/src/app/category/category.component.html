@@ -133,7 +133,7 @@
                 </div>  
                 <p>{{all.content | slice:0:250 }}....</p>
                 <div class="post-footer"  *ngIf="!loggedIn">
-                  <a class="btn btn-secondary"  [routerLink]="['/Login']" role="button">Read More</a>&nbsp;
+                  <a class="btn btn-secondary" (click)="nav(all.id)" role="button">Read More</a>&nbsp;
                   <!-- <a class="float-right p-t-10"  (click)="follow(all.id)"><i class="fa fa-heart-o"></i> {{all.views}}</a> -->
                   <!-- <a class="float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-up"></i> {{all.like}}</a> -->
     
@@ -146,7 +146,7 @@
                 <div class="post-footer"  *ngIf="loggedIn" >
                  
                   <!-- <div *ngFor="let cr of follows"> -->
-                  <a class="btn btn-secondary" (click)="nav(all.id)"  role="button">Read More</a>
+                    <a class="btn btn-secondary" (click)="nav(all.id)" role="button">Read More</a>
                   <!-- <a class="float-right p-t-10"  (click)="follow(all.id)"><i class="fa fa-heart-o"></i> {{all.views}}</a> -->
                   <!-- <a class="float-right p-t-10" (click)="likes(all.id)"><i class="fa fa-thumbs-up"></i> {{all.like}}</a> -->
     

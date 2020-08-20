@@ -159,6 +159,18 @@ uploadFiles(event){
        
         
      })
+     this.Jarwis.getallrecenttitle().subscribe(
+      data=>{
+      // this.resa = data;  
+      // this.resah=this.resa.event[0]
+      // this.actname1=this.resah.actname
+      // this.id1=this.resah.id
+      // this.resac=this.resa.arti_cat
+
+      console.log("recent",data)
+     
+      
+   })
      this.Jarwis.getalledittedpost().subscribe(
        data=>{
          this.edittedpost = data;

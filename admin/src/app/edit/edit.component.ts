@@ -229,16 +229,19 @@ this.ngOnInit()
 //  this.router.navigateByUrl('/User/(side:Details)');
 }
 onSubmit2() {
-   console.log(this.paramsid)
+  // this.disabled = true;
  //  console.log(this.orderForm.value) 
   this.Jarwis.updatelive({id:this.paramsid}).subscribe(
     data => this.handleResponse(data),
       error => this.handleError(error)
  );
- this.disabled=true;
+//  this.disabled=false;
   // this.sav= 'Updating';
  }
  handleError(error: any): void {
+  let snackBarRef = this.snackBar.open('Failed', 'Dismiss', {
+    duration: 2000
+  })
   // this.disabled=false;
   // this.sav= 'Update';
  }
@@ -246,10 +249,10 @@ onSubmit2() {
  
  
  handleResponse(data) {    
-  let snackBarRef = this.snackBar.open('Successfully', 'Dismiss', {
+  let snackBarRef = this.snackBar.open('Successful', 'Dismiss', {
     duration: 2000
   })
-  this.disabled=true;
+  // this.disabled=true;
  this.router.navigateByUrl('/admin');
  //  this.router.navigateByUrl('/User/(side:Details)');
  }

@@ -219,21 +219,25 @@ class DisplayController extends Controller
     }
     public function getallrecenttitle()
     {
+        $ydate = date('Y-m-d 00-00-00');
         $ldate = date('Y-m-d');
-        // return $ldate;
+        // return $ydate;
         return response()->json(
           [
             'title' =>title::orderBy('id', 'desc')->join('categories','titles.category_id','=','categories.id')
                 ->join('users','titles.user_id','=','users.id')
             ->select('titles.*','categories.catname','categories.destription','categories.activity_id','users.firstname','users.lastname','users.middlename') 
-           ->where('titles.status','=','N')
+        //    ->where('titles.status','=','N')
+        ->where('titles.updated_at','>',$ydate)
+        //    ->whereBetween('titles.updated_at',array($ydate, $ldate))
             // ->limit(10) 
             ->get(),
             'gallery'=>Galleries::orderBy('id','desc')->join('titles','galleries.title_id','=','titles.id')
             ->join('users','titles.user_id','=','users.id')
              ->select('galleries.*','titles.name_title','titles.location','titles.t_image','users.firstname','users.lastname','users.middlename','users.image','users.email')
-             ->where('titles.status','=','N')
-             ->where('titles.updated_at','=',$ldate)
+            //  ->where('titles.status','=','N')
+            ->where('titles.updated_at','=',$ldate)
+            // ->whereBetween('titles.updated_at',array($ydate,$ldate))
              //    ->where('title_id','=',$id)
             ->get(),
         

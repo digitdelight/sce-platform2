@@ -152,12 +152,12 @@
           Recent Contribution on existing Post
           <span class="menu-active"><i class="fa fa-caret-up"></i></span>
       </a></li>
-      <!-- <li>
+      <li>
       <a data-toggle="tab" href="#list-tab">
-          <span class="menu-icon"><i class="fa fa-user"></i></span>
-          New Users
+          <span class="menu-icon"><i class="fa fa-list"></i></span>
+          Recent Actions
           <span class="menu-active"><i class="fa fa-caret-up"></i></span>
-      </a></li> -->
+      </a></li>
     </ul>
     <div class="tab-content">
       <div id="home-tab" class="tab-pane active">                                         
@@ -263,6 +263,47 @@
                </div>                                                                       
            </div>                              
       </div>
+      <div id="list-tab" class="tab-pane sidebar-widget">                                         
+        <div class="content-list content-image menu-action-right">
+        <div  data-rel="scroll" data-scrollheight="550">
+            <ul class="list-wrapper pd-lr-15" *ngFor="let rc of recent.title | paginate: {itemsPerPage: 10, currentPage: p}">
+                 <li>  
+                     <div class="menu-icon"><a href="{{this.appUrl}}{{rc.t_image}}"><img alt="image" src="{{this.appUrl}}{{rc.t_image}}"></a></div> 
+                     <div class="menu-text"> 
+                         {{rc.name_title}}  
+                     </div>      
+                     
+                     <!-- <p *ngIf ="r.status == 'T'">Action : Trashed</p>                                       -->
+                     <div class="menu-text">
+                         <div class="menu-info">
+                    <span *ngIf ="rc.status == 'T'">Action : Trashed</span>
+                     <span *ngIf ="rc.status == 'Y'">Action : Published</span>  
+                     <span *ngIf ="rc.status == 'E'">Action : Editted</span>  in <a>{{rc.catname}}</a> - 
+ 
+                             <span class="menu-date">{{rc.updated_at}} </span> - 
+                             <!-- <span class="menu-rating vd_yellow"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span> -->
+                                                                                            
+                         </div>
+                     </div>
+                     <!-- <div class="menu-action">  
+                         <div class="menu-action-icon vd_green" routerLink="" (click)="navigates(r.id)"  data-original-title="Approve" data-rel="tooltip-bottom">
+                             <i class="fa fa-pencil"></i>
+                         </div>   
+                                                                                 
+                         <div class="menu-action-icon vd_red"   data-original-title="Reject" (click)="rejects(r.id)" data-rel="tooltip-bottom">
+                             <i class="fa fa-times"></i>
+                         </div>                                                                                                                                       
+                     </div>                                                	   -->
+                 </li>
+                     
+            </ul>
+            </div>
+            <div class="closing text-center" *ngIf = "recent.title == []">
+                 <a  >See All Recent Actions <i class="fa fa-angle-double-right"></i></a>
+            </div>                                                                                                            
+        </div>                              
+ 
+       </div>
     </div>
 </div> <!-- tabs-widget -->              </div>
           <!-- .col-md-6 --> 

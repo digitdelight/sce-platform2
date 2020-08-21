@@ -342,7 +342,7 @@ foreach ($image_name as $img) {
    
     $updatetitle=DB::table('titles')
     ->where('id', $id)
-    ->update(['status' =>'Y']); 
+    ->update(['status' =>'Y', 'updated_at'=>now()]); 
   
      return $updatetitle;
     // if($update){
@@ -360,7 +360,7 @@ foreach ($image_name as $img) {
    
     $updatetitle=DB::table('titles')
     ->where('id', $id)
-    ->update(['status' =>'N']); 
+    ->update(['status' =>'N', 'updated_at'=>now()]); 
   
      return $updatetitle;
     // if($update){
@@ -404,7 +404,7 @@ foreach ($image_name as $img) {
    
     $trash=DB::table('titles')
     ->where('id', $id)
-    ->update(['status' =>'T']); 
+    ->update(['status' =>'T', 'updated_at'=>now()]); 
   
      return $trash;
     

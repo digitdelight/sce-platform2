@@ -62,6 +62,7 @@ p:any;
   //   videos:null,
   //   contents:null,
   //   }
+  recent:any;
   public img=[];
   ngOnInit() {
     // this.router.navigateByUrl('');
@@ -161,13 +162,13 @@ uploadFiles(event){
      })
      this.Jarwis.getallrecenttitle().subscribe(
       data=>{
-      // this.resa = data;  
+      this.recent = data;  
       // this.resah=this.resa.event[0]
       // this.actname1=this.resah.actname
       // this.id1=this.resah.id
       // this.resac=this.resa.arti_cat
 
-      console.log("recent",data)
+      // console.log("recent",data)
      
       
    })
